@@ -15,11 +15,11 @@ AGN variability can be modeled as a damped random walk (DRW), which behaves as r
 
    * - Exploring the DRW parameter distributions of SDSS S82 AGN
      - Reproduce the plots in `MacLeod et al 2010 <https://iopscience.iop.org/article/10.1088/0004-637X/721/2/1014>`_ describing the dependence of DRW parameters on physical properties of the SDSS S82 AGN
-     - `ipynb <Reproduce_S82_DRW.ipynb>`_, `rendered <https://nbviewer.jupyter.org/github/jiwoncpark/damped-random-walk/blob/rendered/notebooks/Reproduce_S82_DRW.ipynb>`_
+     - `ipynb <notebooks/Reproduce_S82_DRW.ipynb>`_, `rendered <https://nbviewer.jupyter.org/github/jiwoncpark/damped-random-walk/blob/rendered/notebooks/Reproduce_S82_DRW.ipynb>`_
      - `Ji Won Park <https://github.com/jiwoncpark/damped-random-walk/issues/new?body=@jiwoncpark>`_
 
 
    * - Validating the DRW parameter distributions of DC2 AGN
      - Use the same plotting tools in ``Reproduce_S82_DRW.ipynb`` to validate the variability of DC2 AGN
-     - `ipynb <Validate_DC2_DRW.ipynb>`_, `rendered <https://nbviewer.jupyter.org/github/jiwoncpark/damped-random-walk/blob/rendered/notebooks/Validate_DC2_DRW.ipynb>`_
+     - `ipynb <notebooks/Validate_DC2_DRW.ipynb>`_, `rendered <https://nbviewer.jupyter.org/github/jiwoncpark/damped-random-walk/blob/rendered/notebooks/Validate_DC2_DRW.ipynb>`_
      - `Ji Won Park <https://github.com/jiwoncpark/damped-random-walk/issues/new?body=@jiwoncpark>`_

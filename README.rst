@@ -21,5 +21,5 @@ AGN variability can be modeled as a damped random walk (DRW), which behaves as r
 
    * - Validating the DRW parameter distributions of DC2 AGN
      - Use the same plotting tools in ``Reproduce_S82_DRW.ipynb`` to validate the variability of DC2 AGN
-     - Links pending
+     - `ipynb <Validate_DC2_DRW.ipynb>`_, `rendered <https://nbviewer.jupyter.org/github/jiwoncpark/damped-random-walk/blob/rendered/notebooks/Validate_DC2_DRW.ipynb>`_
      - `Ji Won Park <https://github.com/jiwoncpark/damped-random-walk/issues/new?body=@jiwoncpark>`_

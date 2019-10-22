@@ -12,11 +12,11 @@ def plot_fig3_topleft(df):
     Parameters
     ----------
     df : Pandas DataFrame
-        catalog containing the keys `log_rf_tau` and `M_i_kcorr0_drw`
+        catalog containing the keys `log_rf_tau` and `M_i_kcorr0`
     
     """
     
-    filled_log_rf_tau = df[(df['M_i_kcorr0_drw'] > -27.0) & (df['M_i_kcorr0_drw'] < -26.0)]['log_rf_tau']
+    filled_log_rf_tau = df[(df['M_i_kcorr0'] > -27.0) & (df['M_i_kcorr0'] < -26.0)]['log_rf_tau']
 
     _, binning, _ = plt.hist(df['log_rf_tau'], bins=np.arange(0.0, 5.0, 0.2),
                              color='tab:blue', edgecolor='k', alpha=0.5, label='all')
@@ -31,11 +31,11 @@ def plot_fig3_topright(df):
     Parameters
     ----------
     df : Pandas DataFrame
-        catalog containing the keys `log_sf_inf` and `M_i_kcorr0_drw`
+        catalog containing the keys `log_sf_inf` and `M_i_kcorr0`
         
     """
     
-    filled_sf = 10.0**(df[(df['M_i_kcorr0_drw'] > -27.0) & (df['M_i_kcorr0_drw'] < -26.0)]['log_sf_inf'].values)
+    filled_sf = 10.0**(df[(df['M_i_kcorr0'] > -27.0) & (df['M_i_kcorr0'] < -26.0)]['log_sf_inf'].values)
 
     _, binning, _ = plt.hist(10.0**df['log_sf_inf'].values, bins=np.arange(0.0, 1.0, 0.02),
                              color='tab:blue', edgecolor='k', alpha=0.5, label='all')
@@ -50,7 +50,7 @@ def plot_fig3_bottom(df, bandpass=None):
     Parameters
     ----------
     df : Pandas DataFrame
-        catalog containing the keys `log_sf_inf`, `log_rf_tau` and and `M_i_kcorr0_drw`
+        catalog containing the keys `log_sf_inf`, `log_rf_tau` and and `M_i_kcorr0`
         
     """
     

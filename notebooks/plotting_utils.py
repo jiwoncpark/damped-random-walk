@@ -169,8 +169,8 @@ def plot_2d_hist(x_values, y_values, x_bins, y_bins, invert_y_axis, ticks_color,
     else:
         custom_norm = None
     hist, _, _, im = ax.hist2d(x_values, y_values, bins=[x_bins, y_bins], cmap=cmap_name, norm=custom_norm)
-    ax.set_ylabel(x_label)
-    ax.set_xlabel(y_label)
+    ax.set_ylabel(y_label)
+    ax.set_xlabel(x_label)
     if invert_y_axis:
         ax.invert_yaxis()
     cbar = fig.colorbar(im, cax=cax, orientation='horizontal')

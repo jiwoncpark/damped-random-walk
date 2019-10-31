@@ -3,6 +3,8 @@ Damped Random Walk
 
 AGN variability can be modeled as a damped random walk (DRW), which behaves as random walk at short time scales but asymptotically reaches a finite amplitude of variability at long time scales. The DRW model has two parameters: the damping timescale (``tau``) and the long-term amplitude of variability (``SF_inf``). 
 
+`Diagram <http://classic.sdss.org/dr5/algorithms/qsotargchart.gif>`_ of the SDSS quasar selection pipeline
+
 .. list-table::
    :widths: 10 20 10 10
    :header-rows: 1

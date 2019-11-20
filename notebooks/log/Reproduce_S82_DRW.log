@@ -1,0 +1,84 @@
+[NbConvertApp] Converting notebook Reproduce_S82_DRW.ipynb to notebook
+[NbConvertApp] Executing notebook with kernel: desc-stack
+[NbConvertApp] ERROR | Error while converting 'Reproduce_S82_DRW.ipynb'
+Traceback (most recent call last):
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/nbconvertapp.py", line 410, in export_single_notebook
+    output, resources = self.exporter.from_filename(notebook_filename, resources=resources)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/exporters/exporter.py", line 179, in from_filename
+    return self.from_file(f, resources=resources, **kw)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/exporters/exporter.py", line 197, in from_file
+    return self.from_notebook_node(nbformat.read(file_stream, as_version=4), resources=resources, **kw)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/exporters/notebook.py", line 32, in from_notebook_node
+    nb_copy, resources = super(NotebookExporter, self).from_notebook_node(nb, resources, **kw)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/exporters/exporter.py", line 139, in from_notebook_node
+    nb_copy, resources = self._preprocess(nb_copy, resources)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/exporters/exporter.py", line 316, in _preprocess
+    nbc, resc = preprocessor(nbc, resc)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/preprocessors/base.py", line 47, in __call__
+    return self.preprocess(nb, resources)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/preprocessors/execute.py", line 405, in preprocess
+    nb, resources = super(ExecutePreprocessor, self).preprocess(nb, resources)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/preprocessors/base.py", line 69, in preprocess
+    nb.cells[index], resources = self.preprocess_cell(cell, resources, index)
+  File "/usr/common/software/jupyter/19-09/lib/python3.7/site-packages/nbconvert/preprocessors/execute.py", line 448, in preprocess_cell
+    raise CellExecutionError.from_cell_and_msg(cell, out)
+nbconvert.preprocessors.execute.CellExecutionError: An error occurred while executing the following cell:
+------------------
+plotting_utils.plot_fig3_topleft(merged)
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mKeyError[0m                                  Traceback (most recent call last)
+[0;32m/opt/lsst/software/stack/python/miniconda3-4.5.12/envs/lsst-scipipe-1172c30/lib/python3.7/site-packages/pandas/core/indexes/base.py[0m in [0;36mget_loc[0;34m(self, key, method, tolerance)[0m
+[1;32m   2656[0m             [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 2657[0;31m                 [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_engine[0m[0;34m.[0m[0mget_loc[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2658[0m             [0;32mexcept[0m [0mKeyError[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32mpandas/_libs/index.pyx[0m in [0;36mpandas._libs.index.IndexEngine.get_loc[0;34m()[0m
+
+[0;32mpandas/_libs/index.pyx[0m in [0;36mpandas._libs.index.IndexEngine.get_loc[0;34m()[0m
+
+[0;32mpandas/_libs/hashtable_class_helper.pxi[0m in [0;36mpandas._libs.hashtable.PyObjectHashTable.get_item[0;34m()[0m
+
+[0;32mpandas/_libs/hashtable_class_helper.pxi[0m in [0;36mpandas._libs.hashtable.PyObjectHashTable.get_item[0;34m()[0m
+
+[0;31mKeyError[0m: 'duty_cycle'
+
+During handling of the above exception, another exception occurred:
+
+[0;31mKeyError[0m                                  Traceback (most recent call last)
+[0;32m<ipython-input-18-e999c4aa9ae6>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mplotting_utils[0m[0;34m.[0m[0mplot_fig3_topleft[0m[0;34m([0m[0mmerged[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m/global/u1/j/jwp/damped-random-walk/.beavis/damped-random-walk/notebooks/plotting_utils.py[0m in [0;36mplot_fig3_topleft[0;34m(df, area, duty_cycle_on)[0m
+[1;32m     17[0m     """
+[1;32m     18[0m     [0;32mif[0m [0mduty_cycle_on[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 19[0;31m         [0mdf[0m [0;34m=[0m [0mdf[0m[0;34m[[0m[0mdf[0m[0;34m[[0m[0;34m'duty_cycle'[0m[0;34m][0m[0;34m==[0m[0;32mTrue[0m[0;34m][0m[0;34m.[0m[0mcopy[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     20[0m     [0mfilled_log_rf_tau[0m [0;34m=[0m [0mdf[0m[0;34m[[0m[0;34m([0m[0mdf[0m[0;34m[[0m[0;34m'M_i'[0m[0;34m][0m [0;34m>[0m [0;34m-[0m[0;36m27.0[0m[0;34m)[0m [0;34m&[0m [0;34m([0m[0mdf[0m[0;34m[[0m[0;34m'M_i'[0m[0;34m][0m [0;34m<[0m [0;34m-[0m[0;36m26.0[0m[0;34m)[0m[0;34m][0m[0;34m[[0m[0;34m'log_rf_tau'[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m     21[0m [0;34m[0m[0m
+
+[0;32m/opt/lsst/software/stack/python/miniconda3-4.5.12/envs/lsst-scipipe-1172c30/lib/python3.7/site-packages/pandas/core/frame.py[0m in [0;36m__getitem__[0;34m(self, key)[0m
+[1;32m   2925[0m             [0;32mif[0m [0mself[0m[0;34m.[0m[0mcolumns[0m[0;34m.[0m[0mnlevels[0m [0;34m>[0m [0;36m1[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2926[0m                 [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_getitem_multilevel[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 2927[0;31m             [0mindexer[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mcolumns[0m[0;34m.[0m[0mget_loc[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2928[0m             [0;32mif[0m [0mis_integer[0m[0;34m([0m[0mindexer[0m[0;34m)[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2929[0m                 [0mindexer[0m [0;34m=[0m [0;34m[[0m[0mindexer[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m/opt/lsst/software/stack/python/miniconda3-4.5.12/envs/lsst-scipipe-1172c30/lib/python3.7/site-packages/pandas/core/indexes/base.py[0m in [0;36mget_loc[0;34m(self, key, method, tolerance)[0m
+[1;32m   2657[0m                 [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_engine[0m[0;34m.[0m[0mget_loc[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2658[0m             [0;32mexcept[0m [0mKeyError[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 2659[0;31m                 [0;32mreturn[0m [0mself[0m[0;34m.[0m[0m_engine[0m[0;34m.[0m[0mget_loc[0m[0;34m([0m[0mself[0m[0;34m.[0m[0m_maybe_cast_indexer[0m[0;34m([0m[0mkey[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2660[0m         [0mindexer[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0mget_indexer[0m[0;34m([0m[0;34m[[0m[0mkey[0m[0;34m][0m[0;34m,[0m [0mmethod[0m[0;34m=[0m[0mmethod[0m[0;34m,[0m [0mtolerance[0m[0;34m=[0m[0mtolerance[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2661[0m         [0;32mif[0m [0mindexer[0m[0;34m.[0m[0mndim[0m [0;34m>[0m [0;36m1[0m [0;32mor[0m [0mindexer[0m[0;34m.[0m[0msize[0m [0;34m>[0m [0;36m1[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32mpandas/_libs/index.pyx[0m in [0;36mpandas._libs.index.IndexEngine.get_loc[0;34m()[0m
+
+[0;32mpandas/_libs/index.pyx[0m in [0;36mpandas._libs.index.IndexEngine.get_loc[0;34m()[0m
+
+[0;32mpandas/_libs/hashtable_class_helper.pxi[0m in [0;36mpandas._libs.hashtable.PyObjectHashTable.get_item[0;34m()[0m
+
+[0;32mpandas/_libs/hashtable_class_helper.pxi[0m in [0;36mpandas._libs.hashtable.PyObjectHashTable.get_item[0;34m()[0m
+
+[0;31mKeyError[0m: 'duty_cycle'
+KeyError: 'duty_cycle'
+

@@ -5,7 +5,7 @@ import pandas as pd
 from pandas_utils import downcast_numeric
 import GCRCatalogs
 
-def join_agn_with_cosmodc2_in_chunks(agn_db_path='/global/projecta/projectdirs/lsst/groups/SSim/DC2/cosmoDC2_v1.1.4/agn_db_mbh7_mi30_sf4.db', save_dir='data'):
+def join_agn_with_cosmodc2_in_chunks(agn_db_path='/global/projecta/projectdirs/lsst/groups/SSim/DC2/cosmoDC2_v1.1.4/agn_db_mbh7_mi30_sf4.db', save_dir='data', dictcol_name='varParamStr'):
     """Save a join between cosmoDC2 and the AGN db in chunks
     
     Parameters
@@ -18,11 +18,12 @@ def join_agn_with_cosmodc2_in_chunks(agn_db_path='/global/projecta/projectdirs/l
     """
     agn_chunks = read_agn_params_in_chunks(agn_db_path)
     num_agn_chunks = len(agn_chunks)
+    print(num_agn_chunks)
     cosmodc2 = GCRCatalogs.load_catalog('cosmoDC2_v1.1.4_image') # 35s in Jupyter-dev
-    for chunk_id in [50,]:#range(num_agn_chunks):
-        joined_df = join_agn_with_cosmodc2(agn_chunks[chunk_id], cosmodc2)
+    for chunk_id in range(num_agn_chunks):
+        joined_df = join_agn_with_cosmodc2(agn_chunks[chunk_id], cosmodc2, dictcol_name)
         # Optimize memory usage
-        joined_df = downcast_numeric(joined_df)
+        #joined_df = downcast_numeric(joined_df)
         save_file = os.path.join(save_dir, 'joined_%d.csv' %chunk_id)
         joined_df.to_csv(save_file)
     return None
@@ -47,11 +48,11 @@ def read_agn_params_in_chunks(agn_db_path):
     #cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
     #print(cursor.fetchall())
     # Create list of agn_params table in Pandas DataFrame format
-    agn_df_gen = pd.read_sql(sql='SELECT * from agn_params', con=conn, chunksize=200000)
+    agn_df_gen = pd.read_sql(sql='SELECT * from agn_params', con=conn, chunksize=250000)
     agn_chunks = list(agn_df_gen)
     return agn_chunks
         
-def join_agn_with_cosmodc2(agn_df, loaded_cosmodc2):
+def join_agn_with_cosmodc2(agn_df, loaded_cosmodc2, dictcol_name):
     """Join the AGN db with cosmoDC2
     
     Parameters
@@ -69,7 +70,7 @@ def join_agn_with_cosmodc2(agn_df, loaded_cosmodc2):
     """
     
     agn_galaxy_ids = agn_df['galaxy_id'].values
-    agn_df = unravel_dictcol(agn_df)
+    agn_df = unravel_dictcol(agn_df, dictcol_name)
     quantities = ['galaxy_id', 'redshift',
                   'blackHoleAccretionRate', 'blackHoleEddingtonRatio', 'blackHoleMass',]
     #quantities += ['mag_true_%s_sdss' %bp for bp in 'ugriz']
@@ -79,10 +80,10 @@ def join_agn_with_cosmodc2(agn_df, loaded_cosmodc2):
                'galaxy_id <= %d' %(galaxy_id_max)]
     cosmodc2_obj = loaded_cosmodc2.get_quantities(quantities, filters=filters)
     cosmodc2_df = pd.DataFrame(cosmodc2_obj)
-    joined = pd.merge(cosmodc2_df, agn_df, on='galaxy_id')
+    joined = pd.merge(cosmodc2_df, agn_df, how='inner', on='galaxy_id')
     return joined
 
-def unravel_dictcol(agn_df):
+def unravel_dictcol(agn_df, dictcol_name='varParamStr'):
     """Unravel the json-type column of agn params (time-consuming and much memory overhead!)
     
     Parameters
@@ -97,9 +98,9 @@ def unravel_dictcol(agn_df):
     
     """
     # Unravel the string into dictionary
-    agn_df['varParamStr'] = agn_df['varParamStr'].apply(eval)
+    agn_df[dictcol_name] = agn_df[dictcol_name].apply(eval)
     # Convert the dictionary inside key 'p' of the 'varParamStr' dictionary into columns
-    agn_params_df = (agn_df['varParamStr'].apply(pd.Series))['p'].apply(pd.Series)
+    agn_params_df = (agn_df[dictcol_name].apply(pd.Series))['p'].apply(pd.Series)
     # Combine the agn parameters with the original df containing galaxy_id and magNorm
-    agn_df = pd.concat([agn_df.drop(['varParamStr'], axis=1), agn_params_df], axis=1)
+    agn_df = pd.concat([agn_df.drop([dictcol_name], axis=1), agn_params_df], axis=1)
     return agn_df
